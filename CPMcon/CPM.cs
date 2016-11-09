@@ -22,11 +22,33 @@ namespace CPMcon
             {
                 foreach (Relationships relation in list[i].Predecessors)
                 {
-                    if (list[i].Est < relation.Pred.Eet)
-                        list[i].Est = relation.Pred.Eet;
+                    switch(relation.RelationshipType)
+                    {
+                        case Relationships.relType.FS:
+                            if (list[i].Est < relation.Pred.Eet +1+ relation.Lag)
+                                list[i].Est = relation.Pred.Eet +1 + relation.Lag;
+                            list[i].Eet = list[i].Est + list[i].Duration -1;
+                            break;
+                        case Relationships.relType.FF:
+                            if (list[i].Eet < relation.Pred.Eet + relation.Lag)
+                                list[i].Eet = relation.Pred.Eet + relation.Lag;
+                            list[i].Est = list[i].Eet - list[i].Duration + 1;
+                            break;
+                        case Relationships.relType.SS:
+                            if (list[i].Est < relation.Pred.Est + relation.Lag)
+                                list[i].Est = relation.Pred.Est + relation.Lag;
+                            list[i].Eet = list[i].Est + list[i].Duration - 1;
+                            break;
+                        case Relationships.relType.SF:
+                            if (list[i].Eet < relation.Pred.Est + relation.Lag)
+                                list[i].Est = relation.Pred.Eet + relation.Lag;
+                            list[i].Eet = list[i].Est + list[i].Duration - 1;
+                            break;
+                    }
+                    
                 }
 
-                list[i].Eet = list[i].Est + list[i].Duration;
+                
             }
 
             return list;
@@ -50,12 +72,33 @@ namespace CPMcon
                 {
                     foreach (Relationships relation in list[i].Successors)
                     {
-                        if (list[i].Let == 0)
-                            list[i].Let = relation.Succ.Lst;
-                        else if (list[i].Let > relation.Succ.Lst)
-                            list[i].Let = relation.Succ.Lst;
+                        switch(relation.RelationshipType)
+                        {
+                            case (Relationships.relType.FS):
+                                if (list[i].Let == 0)
+                                    list[i].Let = relation.Succ.Lst - relation.Lag;
+                                else if (list[i].Let > relation.Succ.Lst - relation.Lag)
+                                    list[i].Let = relation.Succ.Lst - relation.Lag;
+                                list[i].Lst = list[i].Let - list[i].Duration +1 ;
+                                break;
+                            case Relationships.relType.FF:
+                                if (list[i].Let == 0)
+                                    list[1].Let = relation.Succ.Let - relation.Lag;
+                                else if (list[i].Let > relation.Succ.Let - relation.Lag)
+                                    list[1].Let = relation.Succ.Let - relation.Lag;
+                                break;
+
+                            case Relationships.relType.SS:
+
+                                break;
+
+                            case Relationships.relType.SF:
+
+                                break;
+                        }
+                        
                     }
-                    list[i].Lst = list[i].Let - list[i].Duration;
+                    
                 }
                 else
                 {

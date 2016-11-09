@@ -37,9 +37,10 @@ namespace CPMcon
             rel.Succ = b;
             rel.Add();
             Relationships rel2 = new Relationships();
-            rel2.RelationshipType = Relationships.relType.FS;
+            rel2.RelationshipType = Relationships.relType.FF;
             rel2.Pred = a;
             rel2.Succ = c;
+            rel2.Lag = 5;
             rel2.Add();
             List<Activity> list = new List<Activity>();
             list.Add(a);
@@ -54,7 +55,7 @@ namespace CPMcon
             //CPM.forwardPath(list);
             //CPM.backwardPath(list);
             project.calculate();
-            project.output();
+            //project.output();
         }
 
         /// <summary>
