@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CPMEngine;
+using Interfaces;
+using Relationships;
 
-namespace CPMcon
+namespace Networks
 {
-    class Network
+    public class Network
     {
-        private List<Relationships> relations;
-        private List<Activity> activities;
+        private List<IRelationship> relations;
+        private List<IActivity> activities;
         private int duration;
 
-        public List<Relationships> Relations
+        public List<IRelationship> Relations
         {
             get
             {
@@ -25,7 +25,7 @@ namespace CPMcon
             }
         }
 
-        public List<Activity> Activities
+        public List<IActivity> Activities
         {
             get
             {
@@ -51,28 +51,28 @@ namespace CPMcon
             }
         }
 
-        public void addRelationship(Activity pred, Activity succ, Relationships.relType reltype, int Lag)
+        public void addRelationship(IActivity pred, IActivity succ, relType reltype, int Lag)
         {
-            Relationships rel = new Relationships(pred, succ, reltype, Lag);
+            Relationship rel = new Relationship(pred, succ, reltype, Lag);
             _addRel(rel);
         }
 
-        public void addRelationship(Relationships rel)
+        public void addRelationship(Relationship rel)
         {
             _addRel(rel);
         }
 
-        public void addRelationship(List<Relationships> relationsList)
+        public void addRelationship(List<Relationship> relationsList)
         {
             if (relationsList!=null)
             {
-                foreach (Relationships rel in relationsList)
+                foreach (Relationship rel in relationsList)
                 {
                     _addRel(rel);
                 }
             }
         }
-        private void _addRel(Relationships rel)
+        private void _addRel(Relationship rel)
         {
             if (this.Relations != null)
             {
@@ -80,25 +80,24 @@ namespace CPMcon
             }
             else
             {
-                this.Relations = new List<Relationships>();
+                this.Relations = new List<IRelationship>();
                 this.Relations.Add(rel);
             }
         }
 
         public void calculate()
         {
-            CPM.forwardPath(this.Activities);
-            CPM.backwardPath(this.Activities);
+            CPM.compute(this.Activities);
             this.output();
         }
 
         public void output()
         {
-            Console.WriteLine("\tID\tES\tEF\tLS\tLF");
-            foreach (Activity act in this.Activities)
+            Console.WriteLine("\tID\tDes.\t\tES\tEF\tLS\tLF\tTF");
+            foreach (IActivity act in this.Activities)
             {
 
-                Console.WriteLine("\t{0}\t{1}\t{2}\t{3}\t{4}", act.Id, act.Est, act.Eet, act.Lst, act.Let);
+                Console.WriteLine("\t{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}", act.Id, act.Description, act.Est, act.Eet, act.Lst, act.Let, act.Tf);
             }
             Console.ReadLine();
         }

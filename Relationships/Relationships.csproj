@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1ABA2D98-7C77-4E60-A01C-BDDE3E20D6D3}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{D829F092-DC41-4278-8D95-6881455C8DD0}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CPMcon</RootNamespace>
-    <AssemblyName>CPMcon</AssemblyName>
+    <RootNamespace>Relationships</RootNamespace>
+    <AssemblyName>Relationships</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,32 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Relationships.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Activities\Activities.csproj">
-      <Project>{050e1506-e5cd-4f04-9501-08ee46a7aa03}</Project>
-      <Name>Activities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CPMEngine\CPMEngine.csproj">
-      <Project>{743f8b20-f25a-44ee-85ed-a1a2f15824a8}</Project>
-      <Name>CPMEngine</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{fb9cb912-e1cd-435d-895c-275d17478f42}</Project>
       <Name>Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Networks\Networks.csproj">
-      <Project>{db932542-e33c-43af-b4a3-b5ab72ac1f08}</Project>
-      <Name>Networks</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Relationships\Relationships.csproj">
-      <Project>{d829f092-dc41-4278-8d95-6881455c8dd0}</Project>
-      <Name>Relationships</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

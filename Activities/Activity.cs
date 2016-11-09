@@ -1,13 +1,17 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Text;
+using Interfaces;
+
+
 
 namespace CPMcon
 {
     /// <summary>
     /// Describes an activity according to the Critical Path Method.
     /// </summary>
-    public class Activity
+    public class Activity: IActivity
     {
         private string id;
         private string description;
@@ -16,8 +20,8 @@ namespace CPMcon
         private int lst;
         private int eet;
         private int let;
-        private List <Relationships> successors;
-        private List<Relationships> predecessors;
+        private List<IRelationship> successors;
+        private List<IRelationship> predecessors;
         private int tf;
 
         public Activity()
@@ -25,7 +29,7 @@ namespace CPMcon
             // TODO: Add Constructor Logic here
         }
 
-        public Activity( string ID, string Descrptn, int dur)
+        public Activity(string ID, string Descrptn, int dur)
         {
             this.Duration = dur;
             this.Id = ID;
@@ -141,7 +145,7 @@ namespace CPMcon
         /// <summary>
         /// Activities that come before the activity.
         /// </summary>
-        public List<Relationships> Predecessors
+        public List<IRelationship> Predecessors
         {
             get
             {
@@ -156,7 +160,7 @@ namespace CPMcon
         /// <summary>
         /// Activities that come after the activity.
         /// </summary>
-        public List<Relationships> Successors
+        public List<IRelationship> Successors
         {
             get
             {
@@ -188,7 +192,7 @@ namespace CPMcon
         /// <param name="id">ID being checked.</param>
         /// <param name="i">Current activities' array index.</param>
         /// <returns>Found activity or null.</returns>
-        public Activity CheckActivity(List<Activity> list, string id, int i)
+        public IActivity CheckActivity(List<IActivity> list, string id, int i)
         {
             for (int j = 0; j < i; j++)
             {
@@ -205,7 +209,7 @@ namespace CPMcon
         /// activity.</param>
         /// <param name="i">Current activities' array index.</param>
         /// <returns>index</returns>
-        public int GetIndex(List<Activity> list, Activity aux, int i)
+        public int GetIndex(List<IActivity> list, IActivity aux, int i)
         {
             for (int j = 1; j < i; j++)
             {
@@ -215,29 +219,31 @@ namespace CPMcon
             return 0;
         }
 
-        public void setPredecessors(Relationships relation)
+        public void setPredecessors(IRelationship rel)
         {
-            if(predecessors!= null)
+            IRelationship relation = rel;
+            if (predecessors != null)
             {
                 predecessors.Add(relation);
             }
             else
             {
-                this.predecessors = new List<Relationships>();
+                this.predecessors = new List<IRelationship>();
                 this.predecessors.Add(relation);
             }
         }
-        
-        public void SetSuccessors(Relationships relation)
+
+        public void SetSuccessors(IRelationship relation)
         {
+            
             if (successors != null)
-            {
+            {              
                 successors.Add(relation);
             }
-            
+
             else
             {
-                this.Successors = new List<Relationships>();
+                this.Successors = new List<IRelationship>();
                 this.Successors.Add(relation);
             }
             //return relation;

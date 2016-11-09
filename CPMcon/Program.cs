@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Relationships;
+using Interfaces;
+using Networks;
 
 namespace CPMcon
 {
@@ -30,26 +29,39 @@ namespace CPMcon
             c.Id = "c";
             c.Description = "Activity C";
             c.Duration = 8;
-            
-            Relationships rel = new Relationships();
-            rel.RelationshipType = Relationships.relType.FS;
+            Activity d = new Activity();
+            d.Id = "d";
+            d.Description = "Activity D";
+            d.Duration = 6;
+            Activity E = new Activity();
+            E.Id = "e";
+            E.Description = "Activity E";
+            E.Duration = 8;
+            Relationship rel3 = new Relationship(a, d, relType.FS, 0);
+            Relationship rel4 = new Relationship(d, E, relType.FS, 0);
+            Relationship rel = new Relationship();
+            rel.RelationshipType = relType.FS;
             rel.Pred = a;
             rel.Succ = b;
             rel.Add();
-            Relationships rel2 = new Relationships();
-            rel2.RelationshipType = Relationships.relType.FF;
-            rel2.Pred = a;
+            Relationship rel2 = new Relationship();
+            rel2.RelationshipType = relType.FS;
+            rel2.Pred = b;
             rel2.Succ = c;
-            rel2.Lag = 5;
+            rel2.Lag = 0;
             rel2.Add();
-            List<Activity> list = new List<Activity>();
+            List<IActivity> list = new List<IActivity>();
             list.Add(a);
             list.Add(b);
             list.Add(c);
+            list.Add(d);
+            list.Add(E);
             project.Activities = list;
-            List<Relationships> rels = new List<Relationships>();
+            List<Relationship> rels = new List<Relationship>();
             rels.Add(rel);
             rels.Add(rel2);
+            rels.Add(rel3);
+            rels.Add(rel4);
             project.addRelationship(rels);
 
             //CPM.forwardPath(list);
@@ -98,7 +110,7 @@ namespace CPMcon
 
     //            if (np != 0)
     //            {
-    //                activity.Predecessors = new List<Relationships>();
+    //                activity.Predecessors = new List<Relationship>();
 
     //                string id;
 
