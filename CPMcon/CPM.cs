@@ -66,6 +66,7 @@ namespace CPMcon
 
             return list;
         }
+
         private static int longestDuration(List<Activity> list)
         {
             int maxDur =0;

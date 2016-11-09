@@ -54,7 +54,7 @@ namespace CPMcon
             //CPM.forwardPath(list);
             //CPM.backwardPath(list);
             project.calculate();
-            project.output();
+            //project.output();
         }
 
         /// <summary>
