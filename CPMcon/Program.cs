@@ -39,17 +39,8 @@ namespace CPMcon
             E.Duration = 8;
             Relationship rel3 = new Relationship(a, d, relType.FS, 0);
             Relationship rel4 = new Relationship(d, E, relType.FS, 0);
-            Relationship rel = new Relationship();
-            rel.RelationshipType = relType.FS;
-            rel.Pred = a;
-            rel.Succ = b;
-            rel.Add();
-            Relationship rel2 = new Relationship();
-            rel2.RelationshipType = relType.FS;
-            rel2.Pred = b;
-            rel2.Succ = c;
-            rel2.Lag = 0;
-            rel2.Add();
+            Relationship rel = new Relationship(a,b,relType.FS, 0);
+            Relationship rel2 = new Relationship(b,c,relType.FS,0);
             List<IActivity> list = new List<IActivity>();
             list.Add(a);
             list.Add(b);
@@ -63,11 +54,8 @@ namespace CPMcon
             rels.Add(rel3);
             rels.Add(rel4);
             project.addRelationship(rels);
-
-            //CPM.forwardPath(list);
-            //CPM.backwardPath(list);
             project.calculate();
-            //project.output();
+
         }
 
         /// <summary>

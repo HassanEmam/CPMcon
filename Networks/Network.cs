@@ -11,7 +11,6 @@ namespace Networks
         private List<IRelationship> relations;
         private List<IActivity> activities;
         private int duration;
-
         public List<IRelationship> Relations
         {
             get
@@ -24,7 +23,6 @@ namespace Networks
                 relations = value;
             }
         }
-
         public List<IActivity> Activities
         {
             get
@@ -37,7 +35,6 @@ namespace Networks
                 activities = value;
             }
         }
-
         public int Duration
         {
             get
@@ -50,18 +47,15 @@ namespace Networks
                 duration = value;
             }
         }
-
         public void addRelationship(IActivity pred, IActivity succ, relType reltype, int Lag)
         {
             Relationship rel = new Relationship(pred, succ, reltype, Lag);
             _addRel(rel);
         }
-
         public void addRelationship(Relationship rel)
         {
             _addRel(rel);
         }
-
         public void addRelationship(List<Relationship> relationsList)
         {
             if (relationsList!=null)
@@ -84,13 +78,11 @@ namespace Networks
                 this.Relations.Add(rel);
             }
         }
-
         public void calculate()
         {
             CPM.compute(this.Activities);
             this.output();
         }
-
         public void output()
         {
             Console.WriteLine("\tID\tDes.\t\tES\tEF\tLS\tLF\tTF");
