@@ -85,11 +85,11 @@ namespace Networks
         }
         public void output()
         {
-            Console.WriteLine("\tID\tDes.\t\tES\tEF\tLS\tLF\tTF");
+            Console.WriteLine("\tID\tDes.\t\tDur\tES\tEF\tLS\tLF\tTF");
             foreach (IActivity act in this.Activities)
             {
 
-                Console.WriteLine("\t{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}", act.Id, act.Description, act.Est, act.Eet, act.Lst, act.Let, act.Tf);
+                Console.WriteLine("\t{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}", act.Id, act.Description,act.Duration, act.Est, act.Eet, act.Lst, act.Let, act.Tf);
             }
             Console.ReadLine();
         }
