@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Calendars;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Calendars
 {
-    public class Calendar
+    public static class Calendar
     {
-
+        
     }
 }
+

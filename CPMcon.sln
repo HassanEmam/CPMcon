@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceAssignments", "Reso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calendars", "Calendars\Calendars.csproj", "{C367E35C-FE3D-4CB7-8263-66928618E2D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{4E963D36-1D48-4E1C-B9F8-4DF04B30AB93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{C367E35C-FE3D-4CB7-8263-66928618E2D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C367E35C-FE3D-4CB7-8263-66928618E2D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C367E35C-FE3D-4CB7-8263-66928618E2D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E963D36-1D48-4E1C-B9F8-4DF04B30AB93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E963D36-1D48-4E1C-B9F8-4DF04B30AB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E963D36-1D48-4E1C-B9F8-4DF04B30AB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E963D36-1D48-4E1C-B9F8-4DF04B30AB93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
