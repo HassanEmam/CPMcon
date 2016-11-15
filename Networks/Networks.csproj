@@ -44,6 +44,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Activities\Activities.csproj">
+      <Project>{050e1506-e5cd-4f04-9501-08ee46a7aa03}</Project>
+      <Name>Activities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CPMEngine\CPMEngine.csproj">
       <Project>{743f8b20-f25a-44ee-85ed-a1a2f15824a8}</Project>
       <Name>CPMEngine</Name>

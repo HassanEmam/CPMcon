@@ -2,6 +2,10 @@
 using Relationships;
 using Interfaces;
 using Networks;
+using System;
+using Utilities;
+using Resources;
+using ResourceAssignments;
 
 namespace CPMcon
 {
@@ -38,9 +42,9 @@ namespace CPMcon
             E.Description = "Activity E";
             E.Duration = 8;
             Relationship rel3 = new Relationship(a, d, relType.FS, 0);
-            Relationship rel4 = new Relationship(d, E, relType.FS, 0);
+            Relationship rel4 = new Relationship(d, E, relType.FF, 0);
             Relationship rel = new Relationship(a,b,relType.FS, 0);
-            Relationship rel2 = new Relationship(b,c,relType.FS,0);
+            Relationship rel2 = new Relationship(b,c,relType.SS,0);
             List<IActivity> list = new List<IActivity>();
             list.Add(a);
             list.Add(b);
@@ -48,14 +52,23 @@ namespace CPMcon
             list.Add(d);
             list.Add(E);
             project.Activities = list;
-            List<Relationship> rels = new List<Relationship>();
+            List<IRelationship> rels = new List<IRelationship>();
             rels.Add(rel);
             rels.Add(rel2);
             rels.Add(rel3);
             rels.Add(rel4);
             project.addRelationship(rels);
             project.calculate();
-
+            DateTime startDate = new DateTime(2016, 11, 7);
+            List<DateTime> daysOff = new List<DateTime>();
+            daysOff.Add(new DateTime(2016,11,10));
+            Console.WriteLine(HelperFunctions.AddWorkdays(startDate, 10, daysOff));
+            Resource steelFixer = new Resource("SF", "Steelfixer", resourceType.Labour, 0, 80);
+            ResourceAssignment assign = new ResourceAssignments.ResourceAssignment(a, steelFixer, 100, 80);
+            List<IResourceAssignment> x =  new List<IResourceAssignment>();
+            x.Add(assign);
+            a.Resources = x;
+            Console.WriteLine(a.Resources[0].Resource.ResName);
         }
 
         /// <summary>

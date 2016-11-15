@@ -3,26 +3,48 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Interfaces;
+using ResourceAssignments;
 
 
+/*This class handles activities and their associated properties
+ * the initial version was created by Hassan Emam on 10.Nov.2016
+ * It is part of a wider solution to produce an outstanding construction
+ * scheduling system that is no where comparable to those existing in the market
+ * the project is ambitious and expected to be the state-of-the-art in construction
+ * planning and scheduling. Main diffrentiators include: integration with BIM, GIS,
+ * ERP systems, Application of data warehousing algorithms & predictive analytics,
+ * implementation of the most efficient optimisation algorithms for resource assignment
+ * , levelling, and others.
+ * */
 
 namespace CPMcon
 {
     /// <summary>
     /// Describes an activity according to the Critical Path Method.
     /// </summary>
-    public class Activity: IActivity
+    public class Activity : IActivity
     {
         private string id;
         private string description;
         private int duration;
+        private ICalendar _calendar;
+        private List<IRelationship> successors;
+        private List<IRelationship> predecessors;
+        private List<IResourceAssignment> _resources;
+        private DateTime _eS;
+        private DateTime _eF;
+        private DateTime _lS;
+        private DateTime _lF;
+        private IWBS _wbs;
+
+        //calculated feilds
         private int est;
         private int lst;
         private int eet;
         private int let;
-        private List<IRelationship> successors;
-        private List<IRelationship> predecessors;
         private int tf;
+        
+        
 
         public Activity()
         {
@@ -34,6 +56,27 @@ namespace CPMcon
             this.Duration = dur;
             this.Id = ID;
             this.Description = Descrptn;
+        }
+
+        public Activity(string id, string description, int duration, ICalendar _calendar, List<IRelationship> successors, List<IRelationship> predecessors)
+        {
+            this.Id = id;
+            this.Description = description;
+            this.Duration = duration;
+            this.Calendar = _calendar;
+            this.Successors = successors;
+            this.Predecessors = predecessors;
+        }
+
+        public Activity(string id, string description, int duration, ICalendar _calendar, List<IRelationship> successors, List<IRelationship> predecessors, IWBS wbs)
+        {
+            this.Id = id;
+            this.Description = description;
+            this.Duration = duration;
+            this.Calendar = _calendar;
+            this.Successors = successors;
+            this.Predecessors = predecessors;
+            this.Wbs = wbs;
         }
 
         /// <summary>
@@ -182,6 +225,97 @@ namespace CPMcon
             set
             {
                 tf = value;
+            }
+        }
+
+        public ICalendar Calendar
+        {
+            get
+            {
+                return _calendar;
+            }
+
+            set
+            {
+                _calendar = value;
+            }
+        }
+
+        public List<IResourceAssignment> Resources
+        {
+            get
+            {
+                return _resources;
+            }
+
+            set
+            {
+                _resources = value;
+            }
+        }
+
+        public DateTime ES
+        {
+            get
+            {
+                return _eS;
+            }
+
+            set
+            {
+                _eS = value;
+            }
+        }
+
+        public DateTime EF
+        {
+            get
+            {
+                return _eF;
+            }
+
+            set
+            {
+                _eF = value;
+            }
+        }
+
+        public DateTime LS
+        {
+            get
+            {
+                return _lS;
+            }
+
+            set
+            {
+                _lS = value;
+            }
+        }
+
+        public DateTime LF
+        {
+            get
+            {
+                return _lF;
+            }
+
+            set
+            {
+                _lF = value;
+            }
+        }
+
+        public IWBS Wbs
+        {
+            get
+            {
+                return _wbs;
+            }
+
+            set
+            {
+                _wbs = value;
             }
         }
 

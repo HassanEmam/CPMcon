@@ -54,6 +54,10 @@
       <Project>{050e1506-e5cd-4f04-9501-08ee46a7aa03}</Project>
       <Name>Activities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Calendars\Calendars.csproj">
+      <Project>{c367e35c-fe3d-4cb7-8263-66928618e2d2}</Project>
+      <Name>Calendars</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CPMEngine\CPMEngine.csproj">
       <Project>{743f8b20-f25a-44ee-85ed-a1a2f15824a8}</Project>
       <Name>CPMEngine</Name>
@@ -69,6 +73,22 @@
     <ProjectReference Include="..\Relationships\Relationships.csproj">
       <Project>{d829f092-dc41-4278-8d95-6881455c8dd0}</Project>
       <Name>Relationships</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ResourceAssignment\ResourceAssignments.csproj">
+      <Project>{f4f9f475-b47a-479d-817b-4297359809d7}</Project>
+      <Name>ResourceAssignments</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ResourceCurve\ResourceCurves.csproj">
+      <Project>{e777e8a0-1782-470d-b233-82782fe3a781}</Project>
+      <Name>ResourceCurves</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{59420be5-a4ba-4a72-ba1c-3da44d5b9d7d}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{4e963d36-1d48-4e1c-b9f8-4df04b30ab93}</Project>
+      <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

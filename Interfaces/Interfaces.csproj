@@ -41,7 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IActivity.cs" />
+    <Compile Include="ICalendar.cs" />
+    <Compile Include="INetwork.cs" />
     <Compile Include="IRelationship.cs" />
+    <Compile Include="IResource.cs" />
+    <Compile Include="IResourceAssignment.cs" />
+    <Compile Include="IResourceCurve.cs" />
+    <Compile Include="IWBS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

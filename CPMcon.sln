@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calendars", "Calendars\Cale
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{4E963D36-1D48-4E1C-B9F8-4DF04B30AB93}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceCurves", "ResourceCurve\ResourceCurves.csproj", "{E777E8A0-1782-470D-B233-82782FE3A781}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WBS", "WBS\WBS.csproj", "{D7DC21A1-CDF8-4001-9255-EAD9C838689D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{4E963D36-1D48-4E1C-B9F8-4DF04B30AB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E963D36-1D48-4E1C-B9F8-4DF04B30AB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E963D36-1D48-4E1C-B9F8-4DF04B30AB93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E777E8A0-1782-470D-B233-82782FE3A781}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E777E8A0-1782-470D-B233-82782FE3A781}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E777E8A0-1782-470D-B233-82782FE3A781}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E777E8A0-1782-470D-B233-82782FE3A781}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7DC21A1-CDF8-4001-9255-EAD9C838689D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7DC21A1-CDF8-4001-9255-EAD9C838689D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7DC21A1-CDF8-4001-9255-EAD9C838689D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7DC21A1-CDF8-4001-9255-EAD9C838689D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

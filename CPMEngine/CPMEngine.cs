@@ -3,19 +3,24 @@ using System.Linq;
 using Interfaces;
 using Relationships;
 using CPMcon;
+using System;
+using Utilities;
+
 
 namespace CPMEngine
 {
     public class CPM
     {
+        private int longDur;
         public static void compute(List<IActivity> list)
         {
+            DateTime startDate = new DateTime(2016, 11, 10);
             List<IActivity> startNodes = new List<IActivity>();
-            startNodes = getStartNodes(list);
-            forwardCalculation(startNodes);
+            startNodes = getStartNodes(list, startDate);
+            forwardCalculation(startNodes, new DateTime(2016,11,10));
             List<IActivity> endNodes = new List<IActivity>();
-            endNodes = getEndNodes(list);
-            backwardCalculation(endNodes);
+            endNodes = getEndNodes(list, startDate);
+            backwardCalculation(endNodes, startDate);
         }
         /// <summary>
         /// Checks for activities with no predecessors and assigns early start and finish
@@ -24,7 +29,7 @@ namespace CPMEngine
         /// <param name="list">List of all activities already entered.</param>
         /// <returns>List</IActivity></returns>
         /// 
-        public static List<IActivity> getStartNodes(List<IActivity> list)
+        public static List<IActivity> getStartNodes(List<IActivity> list, DateTime startDate)
         {
             List<IActivity> startNodes = new List<IActivity>();
             foreach (IActivity activity in list)
@@ -32,6 +37,8 @@ namespace CPMEngine
                 if (activity.Predecessors == null)
                 {
                     activity.Est = 0;
+                    activity.ES = startDate;
+                    activity.EF = Utilities.HelperFunctions.AddWorkdays(startDate, activity.Duration);
                     activity.Eet = activity.Est + activity.Duration - 1;
                     startNodes.Add(activity);
                 }
@@ -46,17 +53,21 @@ namespace CPMEngine
         /// <param name="list">List of all activities already entered.</param>
         /// <returns>List</IActivity></returns>
         /// 
-        public static List<IActivity> getEndNodes(List<IActivity> list)
+        public static List<IActivity> getEndNodes(List<IActivity> list, DateTime startDate)
         {
             List<IActivity> endNodes = new List<IActivity>();
             int dur = longestDuration(list);
             foreach (IActivity activity in list)
             {
+                activity.Let = dur;
+                activity.Lst = activity.Let - activity.Duration + 1;
                 if (activity.Successors == null)
                 {
                     activity.Let = dur;
                     activity.Lst = activity.Let - activity.Duration + 1;
                     activity.Tf = activity.Let - activity.Eet;
+                    activity.LS = HelperFunctions.AddWorkdays(startDate, activity.Lst + 1);
+                    activity.LF = HelperFunctions.AddWorkdays(activity.LS, activity.Duration);
                     endNodes.Add(activity);
                 }
             }
@@ -70,7 +81,7 @@ namespace CPMEngine
         /// <param name="list">Array storing the activities already entered.</param>
         /// <returns>void</returns>
         /// 
-        private static void forwardCalculation(List<IActivity> list)
+        private static void forwardCalculation(List<IActivity> list, DateTime startDate)
         {
             List<IActivity> currentSuccessors = new List<IActivity>(); ;
             foreach (IActivity act in list)
@@ -90,26 +101,34 @@ namespace CPMEngine
                                 if (succ.Est < act.Eet + 1 + act.Successors[i].Lag)
                                     succ.Est = act.Eet + 1 + act.Successors[i].Lag;
                                 succ.Eet = succ.Est + succ.Duration - 1;
+                                succ.ES = HelperFunctions.AddWorkdays(startDate, succ.Est+1);
+                                succ.EF = HelperFunctions.AddWorkdays(succ.ES, succ.Duration);
                                 break;
                             case relType.FF:
                                 if (succ.Eet < act.Eet + act.Successors[i].Lag)
                                     succ.Eet = act.Eet + act.Successors[i].Lag;
                                 succ.Est = succ.Eet - succ.Duration + 1;
+                                succ.ES = HelperFunctions.AddWorkdays(startDate, succ.Est+1);
+                                succ.EF = HelperFunctions.AddWorkdays(succ.ES, succ.Duration);
                                 break;
                             case relType.SS:
                                 if (succ.Est < act.Est + act.Successors[i].Lag)
                                     succ.Est = act.Est + act.Successors[i].Lag;
                                 succ.Eet = succ.Est + succ.Duration - 1;
+                                succ.ES = HelperFunctions.AddWorkdays(startDate, succ.Est+1);
+                                succ.EF = HelperFunctions.AddWorkdays(succ.ES, succ.Duration);
                                 break;
                             case relType.SF:
                                 if (succ.Eet < act.Est + act.Successors[i].Lag)
                                     succ.Est = act.Eet + act.Successors[i].Lag;
                                 succ.Eet = succ.Est + succ.Duration - 1;
+                                succ.ES = HelperFunctions.AddWorkdays(startDate, succ.Est+1);
+                                succ.EF = HelperFunctions.AddWorkdays(succ.ES, succ.Duration);
                                 break;
                         }
 
                     }
-                    forwardCalculation(currentSuccessors);
+                    forwardCalculation(currentSuccessors,startDate);
                 }
 
             }
@@ -121,7 +140,7 @@ namespace CPMEngine
         /// </summary>
         /// <param name="list">Array storing the activities already entered.</param>
         /// <returns>void</returns>
-        private static void backwardCalculation(List<IActivity> list)
+        private static void backwardCalculation(List<IActivity> list, DateTime startDate)
         {
             List<IActivity> currentPred = new List<IActivity>();
             foreach (IActivity act in list)
@@ -144,6 +163,8 @@ namespace CPMEngine
                                     pred.Let = act.Lst - act.Predecessors[i].Lag-1;
                                 pred.Lst = pred.Let - pred.Duration + 1;
                                 pred.Tf = pred.Let - pred.Eet;
+                                pred.LS = HelperFunctions.AddWorkdays(startDate, pred.Lst+1);
+                                pred.LF = HelperFunctions.AddWorkdays(pred.LS, pred.Duration);
                                 break;
                             case relType.FF:
                                 if (pred.Let == 0)
@@ -152,19 +173,28 @@ namespace CPMEngine
                                     pred.Let = act.Let - act.Predecessors[i].Lag;
                                 pred.Lst = pred.Let - pred.Duration + 1;
                                 pred.Tf = pred.Let - pred.Eet;
+                                pred.LS = HelperFunctions.AddWorkdays(startDate, pred.Lst + 1);
+                                pred.LF = HelperFunctions.AddWorkdays(pred.LS, pred.Duration);
                                 break;
 
                             case relType.SS:
+                                if (pred.Lst == 0)
+                                    pred.Lst = act.Lst - act.Predecessors[i].Lag;
+                                else if (pred.Lst > act.Lst - act.Predecessors[i].Lag)
+                                    pred.Lst = act.Lst - act.Predecessors[i].Lag;
+                                pred.Let = pred.Lst + pred.Duration - 1;
+                                pred.Tf = pred.Let - pred.Eet;
+                                pred.LS = HelperFunctions.AddWorkdays(startDate, pred.Lst + 1);
+                                pred.LF = HelperFunctions.AddWorkdays(pred.LS, pred.Duration);
 
                                 break;
-
                             case relType.SF:
 
                                 break;
                         }
 
                     }
-                    backwardCalculation(currentPred);
+                    backwardCalculation(currentPred, startDate);
                 }
 
             }

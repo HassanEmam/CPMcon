@@ -9,22 +9,26 @@ namespace Interfaces
 {
     public interface IActivity
     {
-        string Id { get; set; }
+        ICalendar Calendar { get; set; }
         string Description { get; set; }
         int Duration { get; set; }
-        int Est { get; set; }
-        int Lst { get; set; }
         int Eet { get; set; }
+        DateTime EF { get; set; }
+        DateTime ES { get; set; }
+        int Est { get; set; }
+        string Id { get; set; }
         int Let { get; set; }
-        int Tf { get; set; }
+        DateTime LF { get; set; }
+        DateTime LS { get; set; }
+        int Lst { get; set; }
         List<IRelationship> Predecessors { get; set; }
+        List<IResourceAssignment> Resources { get; set; }
         List<IRelationship> Successors { get; set; }
-        IActivity CheckActivity(List<IActivity> list, string id, int i);
-        //var successor {get; set;}
-        int GetIndex(List<IActivity> list, IActivity aux, int i);
-        void setPredecessors(IRelationship relation);
+        int Tf { get; set; }
+
+        Interfaces.IActivity CheckActivity(List<Interfaces.IActivity> list, string id, int i);
+        int GetIndex(List<Interfaces.IActivity> list, Interfaces.IActivity aux, int i);
+        void setPredecessors(IRelationship rel);
         void SetSuccessors(IRelationship relation);
-
-
     }
 }

@@ -3,18 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Interfaces;
 
 namespace Resources
 {
-    public class Resource
+    public class Resource : IResource
     {
-        public enum resourceType
-        {
-            Labour=1,
-            Material=2,
-            Equipment=3,
-            Money=4
-        };
+        
         private string resID;
         private string resName;
         private resourceType resType;

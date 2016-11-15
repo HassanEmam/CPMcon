@@ -8,23 +8,36 @@ namespace Utilities
 {
     public static class HelperFunctions
     {
-        public static DateTime AddWorkdays(this DateTime originalDate, int workDays)
+        private static List<DateTime> _holiDays = new List<DateTime>();
+        public static DateTime AddWorkdays(DateTime originalDate, int workDays, List<DateTime> holidays=null)
         {
-            DateTime tmpDate = originalDate;
-            while (workDays > 0)
+            _holiDays = holidays;
+            DateTime tmpDate = originalDate.AddDays(-1);
+            while (workDays >= 1)
             {
                 tmpDate = tmpDate.AddDays(1);
                 if (tmpDate.DayOfWeek < DayOfWeek.Saturday &&
                     tmpDate.DayOfWeek > DayOfWeek.Sunday &&
                     !tmpDate.IsHoliday())
                     workDays--;
+                
+
             }
             return tmpDate;
         }
 
         public static bool IsHoliday(this DateTime originalDate)
         {
-            // INSERT YOUR HOlIDAY-CODE HERE!
+            if (_holiDays != null)
+            {
+                foreach (DateTime day in _holiDays)
+                {
+                    if (originalDate.Equals(day))
+                    {
+                        return true;
+                    }
+                }
+            }
             return false;
         }
     }
