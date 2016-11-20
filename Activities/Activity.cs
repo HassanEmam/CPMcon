@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using Interfaces;
@@ -24,9 +23,13 @@ namespace CPMcon
     /// </summary>
     public class Activity : IActivity
     {
+        
+        #region private variables
         private string id;
         private string description;
         private int duration;
+        private int _remDur;
+        private actStatus _status;
         private ICalendar _calendar;
         private List<IRelationship> successors;
         private List<IRelationship> predecessors;
@@ -43,9 +46,9 @@ namespace CPMcon
         private int eet;
         private int let;
         private int tf;
-        
-        
+        #endregion
 
+        #region Constructors
         public Activity()
         {
             // TODO: Add Constructor Logic here
@@ -79,6 +82,9 @@ namespace CPMcon
             this.Wbs = wbs;
         }
 
+        #endregion
+
+        #region Properties
         /// <summary>
         /// Identification concerning the activity.
         /// </summary>
@@ -319,6 +325,35 @@ namespace CPMcon
             }
         }
 
+        public int RemDur
+        {
+            get
+            {
+                return _remDur;
+            }
+
+            set
+            {
+                _remDur = value;
+            }
+        }
+
+        public actStatus Status
+        {
+            get
+            {
+                return _status;
+            }
+
+            set
+            {
+                _status = value;
+            }
+        }
+
+        #endregion
+
+        #region Functions
         /// <summary>
         /// Performs a check to verify if an activity exists.
         /// </summary>
@@ -382,6 +417,8 @@ namespace CPMcon
             }
             //return relation;
         }
+
+        #endregion
     }
 }
 

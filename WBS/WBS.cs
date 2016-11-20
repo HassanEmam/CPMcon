@@ -12,11 +12,19 @@ namespace WBSs
         private string _wbsID;
         private string _wbsName;
         private IWBS _parent;
+        private List<IActivity> _activities;
 
         #region Constructor
         public WBS()
         {
 
+        }
+
+        public WBS(string wbsID, string wbsName)
+        {
+            this.WbsID = wbsID;
+            this.WbsName = wbsName;
+            
         }
 
         public WBS(string wbsID, string wbsName, WBS parent)
@@ -67,6 +75,39 @@ namespace WBSs
             }
         }
 
+        public List<IActivity> Activities
+        {
+            get
+            {
+                return _activities;
+            }
+
+            set
+            {
+                _activities = value;
+            }
+        }
+
+        #endregion
+
+        #region Functions
+        /// <summary>
+        /// Add an activity to be associated with WBS node
+        /// </summary>
+        /// <param name="activity"></param>
+
+        public void AddActivity(IActivity activity)
+        {
+            if (activity !=null && activity.Wbs.WbsID == this.WbsID)
+            {
+                Activities.Add(activity);
+            }
+            else if (activity != null && activity.Wbs!= this)
+            {
+                activity.Wbs = this;
+                Activities.Add(activity);
+            }
+        }
         #endregion
     }
 }

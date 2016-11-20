@@ -42,11 +42,12 @@
   <ItemGroup>
     <Compile Include="IActivity.cs" />
     <Compile Include="ICalendar.cs" />
-    <Compile Include="INetwork.cs" />
+    <Compile Include="IProject.cs" />
     <Compile Include="IRelationship.cs" />
     <Compile Include="IResource.cs" />
     <Compile Include="IResourceAssignment.cs" />
     <Compile Include="IResourceCurve.cs" />
+    <Compile Include="IRisk.cs" />
     <Compile Include="IWBS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

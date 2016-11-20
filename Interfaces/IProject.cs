@@ -5,7 +5,7 @@ using Interfaces;
 
 namespace Interfaces
 {
-    public interface INetwork
+    public interface IProject
     {
         List<IActivity> Activities { get; set; }
         int Duration { get; set; }
