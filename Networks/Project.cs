@@ -62,7 +62,10 @@ namespace Networks
 
             set
             {
-                duration = value;
+                if (value >= 0 && value.GetType() == typeof(int))
+                {
+                    duration = value;
+                }
             }
         }
 
